@@ -1,16 +1,39 @@
 # lua_xmove
 
-To dump lua_xmove you need coroutine.create (sub_4B7E710 in my case), jump to sub_4B7E710 (g and paste sub_4B7E710), decompile it:
-```c
-__int64 __fastcall sub_4B7E710(__int64 a1)
-{
-  __int64 v2; // rax
+Moves values between Lua threads.
 
-  sub_4B696A0(a1, a2: 1, a3: 8); // check arg1 is thread/function
-  v2 = sub_4B62BD0(a1); // lua_newthread we got this already
-  sub_4B65980(a1, a2: v2, a3: 1); // <-- lua_xmove(L_main, L_new, index)
+Find coroutine.create via `"isyieldable"` -> xref -> scroll to 0x4175B90. Decompile it:
+
+```c
+__int64 __fastcall sub_4175B90(L, ...)
+{
+  ...
+  *(_BYTE *)v11 = 10;                    // tag = thread
+  // ... allocate and init new thread ...
+  sub_938580(a1, v11, 1);               // <-- lua_xmove(L_main, L_new, 1)
   return 1;
 }
 ```
 
-so the offset is 0x4B65980
+Double click `sub_938580`:
+
+```c
+_OWORD *__fastcall sub_938580(L_from, L_to, int idx)
+{
+  // barrier check on L_to
+  if (idx <= 0) {
+    if (idx <= -10000) slot = pseudoaddr(L_from, idx);
+    else slot = L_from->top + 16*idx;
+  } else {
+    slot = nilobject;
+    if (L_from->base + 16*idx - 16 < L_from->top)
+      slot = L_from->base + 16*idx - 16;
+  }
+  *L_to->top = *slot;
+  L_to->top += 16;
+}
+```
+
+Takes (L_from, L_to, int idx). Moves the value at idx from L_from's stack to L_to's top.
+
+Offset: **0x938580**
