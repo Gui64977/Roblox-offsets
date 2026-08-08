@@ -2,16 +2,42 @@
 
 Moves values between Lua threads.
 
-Find coroutine.create via `"isyieldable"` -> xref -> scroll to 0x4175B90. Decompile it:
+Find coroutine.create via `"isyieldable"` -> xref -> find "create" near "running":
+```asm
+.rdata:00000000061F662F                 db    0
+.rdata:00000000061F6630 off_61F6630     dq offset aCreate_1     ; DATA XREF: sub_4176EC0+6↑o
+.rdata:00000000061F6630                                         ; "create"
+.rdata:00000000061F6638                 dq offset sub_4175B90   ; // <-- decompile this
+.rdata:00000000061F6640                 dq offset aRunning_1    ; "running"
+.rdata:00000000061F6648                 dq offset sub_4176390
+.rdata:00000000061F6650                 dq offset dword_6B442B0
+.rdata:00000000061F6658                 dq offset sub_4174500
+.rdata:00000000061F6660                 dq offset aWrap_0       ; "wrap"
+.rdata:00000000061F6668                 dq offset sub_41760D0
+.rdata:00000000061F6670                 dq offset aYield        ; "yield"
+.rdata:00000000061F6678                 dq offset sub_4176330
+.rdata:00000000061F6680                 dq offset aIsyieldable  ; "isyieldable"
+.rdata:00000000061F6688                 dq offset sub_4176400
+.rdata:00000000061F6690                 dq offset aClose_0      ; "close"
+.rdata:00000000061F6698                 dq offset sub_4176480
+```
+
+Decompile:
 
 ```c
-__int64 __fastcall sub_4175B90(L, ...)
-{
-  ...
-  *(_BYTE *)v11 = 10;                    // tag = thread
-  // ... allocate and init new thread ...
-  sub_938580(a1, v11, 1);               // <-- lua_xmove(L_main, L_new, 1)
-  return 1;
+        v29 = *(_QWORD *)(a1 + 72);
+        *(_QWORD *)v29 = v11;
+        *(_DWORD *)(v29 + 12) = 10;
+        *(_QWORD *)(a1 + 72) += 16LL;
+        v30 = *(void (__fastcall **)(__int64, __int64))(*(_QWORD *)(a1 + 112) + 1328LL);
+        if ( v30 != nullptr )
+          v30(a1, a2: v11);
+        sub_938580(a1, a2: v11, a3: 1);
+        return 1;
+      }
+    }
+  }
+  sub_945D80(a1, a2: 4u); // <-- double click this
 }
 ```
 
