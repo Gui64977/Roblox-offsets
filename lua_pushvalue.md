@@ -1,24 +1,19 @@
 # lua_pushvalue
 
-This will be dumped with the help of luaB offsets we found (search string "_VERSION" go to the only xref and decompile code:
-There you will see this line (3rd line in the table)
-  sub_4B69E30(a1, a2: &off_603A3C8, a3: &off_6BBE0A0);)
+Pushes a copy of the value at the given index onto the stack.
 
-So. to get lua_pushvalue locate:
+Inlined in this build. luaB_getfenv (0x4153770) uses:
+
 ```c
-.rdata:0000000006BBE0D0                 dq offset aGetfenv      ; "getfenv"
-.rdata:0000000006BBE0D8                 dq offset sub_4B7DBE0
+*L->top = *sub_937C00(L, -2);  // copy value from index
+L->top += 16;
 ```
-Double click the sub_RVA and decompile:
+
+The formula:
 ```c
-__int64 __fastcall sub_4B7DBE0(_QWORD *a1)
-{
-  sub_4B7E170(a1, a2: 1);
-  if ( sub_4B628C0((__int64)a1, a2: 0xFFFFFFFFLL) )
-    sub_4B63740(a1, a2: -10002); // <-- lua_pushvalue
-  else
-    sub_4B621A0(a1, a2: -1);
-  sub_4B64AC0((__int64)a1, a2: 0xFFFFFFFFLL, a3: 0);
-  return 1;
+void lua_pushvalue(L, int idx) {
+    TValue* slot = sub_937C00(L, idx);  // 0x937C00
+    *L->top = *slot;                     // copy 16 bytes
+    L->top += 16;
 }
 ```
