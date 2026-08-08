@@ -1,6 +1,6 @@
 # Roblox-offsets
 
-# IMPORTANT NOTICE. MOST OF THE GUIDES ARE **OUTDATED** DUE TO ROBLOX CHANGING A LOT OF STUFF, AND CURRENT DECRYPTED ROBLOX THAT WE GOT IS ASS, I WILL WAIT FOR BYTECODE TO DUMP DECRYPTED ROBLOX AND ONLY THEN PROCEED WITH MAKING GUIDES CORRECT AGAIN.
+# Most of the guides are working again, updated to version d584fb6c717a43d9. Hopefully roblox won't do a massive update again.
 
 This is guide on how to get multiple roblox offsets through ida
 
