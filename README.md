@@ -14,11 +14,11 @@ Made with EVIL
 
 Time spent: over 40 hours
 
-???? lines
+~~placeholder~~ lines
 
-?????? characters
+~~placeholder~~ characters
 
-**SOME OFFSETS CAN BE PRESENT MULTIPLE TIMES, BECAUSE I'M INATTENTIVE AND I DONT KEEP TRACK OF WHAT I ALREADY DID!!!!**
+**Some offsets appear in multiple guides because they’re reused across different patterns, and because I'M INATTENTIVE AND DON'T KEEP TRACK OF WHAT I ALREADY DID!!!!**
 **Signatures will be posted in the nearest future.**
 
 List of current offsets:
