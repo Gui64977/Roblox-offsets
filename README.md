@@ -12,11 +12,11 @@ This is guide on how to get multiple roblox offsets through ida
 
 Made with EVIL
 
-Time spent: 20 hours
+Time spent: over 40 hours
 
-1627 lines
+???? lines
 
-59185 characters
+?????? characters
 
 **SOME OFFSETS CAN BE PRESENT MULTIPLE TIMES, BECAUSE I'M INATTENTIVE AND I DONT KEEP TRACK OF WHAT I ALREADY DID!!!!**
 **Signatures will be posted in the nearest future.**
