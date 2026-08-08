@@ -1,11 +1,18 @@
 # lua_type
 
-lua_type can be found by searching string `"'__tostring' must return a string"`, there is only 1 xref, go to it and decompile: 
+Returns the type tag of the value at the given index.
+
+Inline macro in this build:
+
 ```c
-  if ( (unsigned int)sub_4B65630(a1, a2: 0xFFFFFFFFLL) == 0 ) // <-- lua_type
-  {
-    sub_4B64BC0(a1, a2: -3);
-LABEL_6:
+int lua_type(lua_State* L, int idx) {
+    TValue* tv = luaA_toobject(L, idx);  // 0x937CC0
+    if (tv == NULL || tv == &nilobject) return -1;
+    return tv->tt;  // tag at offset +12
+}
 ```
 
-So the offset is 0x4B65630
+Tags in Roblox Luau:
+- 0 = nil, 1 = boolean, 2 = lightuserdata, 3 = number
+- 4 = integer, 5 = vector, 6 = string, 7 = table
+- 9 = function, 10 = thread, 11 = userdata
