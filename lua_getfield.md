@@ -1,15 +1,18 @@
 # lua_getfield
 
-lua_getfield can be found by searching string "_VERSION", there is only 1 xref, go to it and decompile: 
-find this string:
+Pushes onto the stack the value of table[k].
+
+Found through the Lua_SandBoxThread guide chain: `"__index"` -> SandBoxThread -> sub_119E530 -> sub_119DE10 -> sub_93E0C0.
+
 ```c
-  sub_4B69E30(a1, a2: &off_603A3C8, a3: &off_6BBE0A0); // <-- luaL_register
-```
-Double click sub_4B69E30:
-```c
-    sub_4B622B0((__int64)a1, a2: -1, a3: (__int64)a2);
-    if ( (unsigned int)sub_4B65630(a1, a2: -1) != 7 )
-    {
+__int64 __fastcall sub_93E0C0(L, int idx, const char* k)
+{
+  // pushes TString from k
+  // calls lua_gettable(L, idx)
+  return result;
+}
 ```
 
-So the offset is 0x4B622B0
+Takes (L, table_index, key_string). Creates a TString from the key, pushes it, then does agettable.
+
+Offset: **0x93E0C0**
