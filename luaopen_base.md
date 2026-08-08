@@ -1,13 +1,19 @@
-# luaopen_*
+# luaopen_base
 
-To find luaopen_* search for string "_VERSION", first xref will be it:
-```c
-.rdata:0000000006BBE318 aVersion_3      db '_VERSION',0         ; DATA XREF: sub_4B7E520+56↑o // <-- luaopen_*
+Registers all base library functions (_G, assert, error, print, etc).
+
+Search `"xpcall"` -> xref -> sub_4158D10. This is luaopen_base:
+```asm
+.rdata:0000000006DF441C aXpcall         db 'xpcall',0           ; DATA XREF: sub_4158D10+1610↑o
+.rdata:0000000006DF441C                                         ; sub_4158D10+1837↑r ...
 ```
 
-Or decompile:
 ```c
-__int64 __fastcall sub_4B7E520(_QWORD *a1)
+__int64 __fastcall sub_4158D10(__int64 a1)
 ```
 
-So the offset is 0x4B7E520 (this is luaopen_base)
+Same function as luaB offsets guide - it registers every luaB_ function.
+
+Alternatively: search `"rawget"` -> xref in the base table -> scroll up to find the function that references the whole table.
+
+Offset: **0x4158D10**
