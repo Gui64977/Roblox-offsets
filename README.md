@@ -232,42 +232,44 @@ luaF_newCclosure: 48 89 5C 24 ? 48 89 74 24 ? 57 48 83 EC 20 48 63 F2 49 8B F8
 
 lua_state encryption
 
-luaM_new: 48 89 5C 24 ? 48 89 6C 24 ? 56 57 41 57 48 83 EC 30 48 8B 79
+luaM_new:
 
-luaM_realloc_: 48 89 5C 24 ? 48 89 6C 24 ? 48 89 74 24 ? 48 89 7C 24 ? 41 56 48 83 EC 30 48 8B 79 ? 48 8D 42
+luaM_realloc_:
 
-lua_ref: 40 55 56 48 83 EC 28 80 3D // MIGHT BE WRONG
+lua_ref: 
 
-lua_unref: 48 89 5C 24 ? 57 48 83 EC 20 80 3D ? ? ? ? ? 8B FA 74
+lua_unref: 
 
-print: 4C 8B DC 49 89 53 ? 4D 89 43 ? 4D 89 4B ? 53 48 81 EC 90 00 00 00
+print: 
 
-luaV_settable: 48 89 5C 24 ? 48 89 6C 24 ? 57 41 54 41 57 48 83 EC 40
+luaV_settable:
 
-luaV_concat: 44 89 44 24 ? 89 54 24 ? 48 89 4C 24 ? 53 55 56 57 41 54 41 55 41 56 41 57 48 81 EC D8 02 00 00
+luaV_concat: 
 
-luaH_getn: 48 83 EC 08 44 8B 59 ? 4C 8B D1 // MIGHT BE BAD
+luaH_getn:
 
-lua_gettable: 48 89 5C 24 ? 57 48 83 EC 20 ? ? ? 48 8B D9 48 63 FA 74 ? 4C 8D 41 ? 48 8B D1 E8 ? ? ? ? 85 FF 7E ? 48 8B 43 ? 48 8B CF 4C 8B 43
+lua_gettable:
 
-luaV_gettable: 48 89 5C 24 ? 55 41 54 41 55 41 56 41 57 48 83 EC 40
+luaV_gettable: 
 
-raknetrecieve: 48 8D 05 ? ? ? ? 48 89 45 ? 48 8B 55 ? 48 81 EA 00 00 00 00 0F 10 05 ? ? ? ? 0F 29 45 ? 46 8D 04 E5
+raknetrecieve: 
 
-RakNetReliabilityLayerSend: 48 8D 1D ? ? ? ? 44 38 2D ? ? ? ? 74
+RakNetReliabilityLayerSend:
 
-RaknetReportNetworkError: 48 89 5C 24 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D AC 24 ? ? ? ? 48 81 EC B0 05 00 00
+RaknetReportNetworkError:
 
-RaknetHandleConnectionState: 48 8D 05 ? ? ? ? 44 89 74 24 ? 48 89 44 24 ? 4C 8D 44 24
+RaknetHandleConnectionState:
 
-RaknetSend: 40 55 53 56 57 41 54 41 55 41 56 41 57 48 8D AC 24 ? ? ? ? 48 81 EC C8 01 00 00 48 8B 05 ? ? ? ? 48 33 C4 48 89 85 ? ? ? ? 45 8B F9
+RaknetSend:
 
-RakPeerProcessNetworkPacket: 48 89 5C 24 ? 56 57 41 55 41 56 41 57 48 81 EC 60 06 00 00
+RakPeerProcessNetworkPacket:
 
-SendPacketsToSelf: 48 89 5C 24 ? 48 89 74 24 ? 55 57 41 56 48 8D 6C 24 ? 48 81 EC 80 01 00 00 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 ? 8B 81
+SendPacketsToSelf:
 
-UpdateNetworkLoop: 48 8B C4 48 89 58 ? 48 89 70 ? 55 57 41 54 41 56 41 57 48 8D A8 ? ? ? ? 48 81 EC 70 08 00 00
+UpdateNetworkLoop:
 
-RakPeerReceive: 48 89 5C 24 ? 48 89 74 24 ? 55 57 41 54 41 56 41 57 48 8D AC 24 ? ? ? ? 48 81 EC 90 04 00 00 48 8B 05 ? ? ? ? 48 33 C4 48 89 85 ? ? ? ? 0F B6 DA
+RakPeerReceive:
 
-luaVM_new: 48 89 5C 24 ? 48 89 6C 24 ? 48 89 74 24 ? 57 48 83 EC 20 44 0F B6 41 ? BA 80 00 00 00
+luaVM_new:
+
+NewInstance: 
