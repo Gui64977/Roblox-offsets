@@ -1,6 +1,6 @@
 # luaB offsets (base library functions)
 
-All base library function offsets in one go.
+All base library function.
 
 Search string (shift f12) `"xpcall"` go to xref, decompile:
 
