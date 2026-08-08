@@ -2,7 +2,7 @@
 
 GetLuaStateForInstance - gets the lua_State associated with a Roblox Instance.
 
-Search string (shift f12) `"Script Start"` go to **first** xref (ScriptContext). Decompile (f5), look up from where `"Script Start"` is assigned:
+Search string (shift f12) `"Script Start"` go to **first** xref (ScriptContext). Decompile (f5), look up from  `"Script Start"`:
 
 ```c
             }
