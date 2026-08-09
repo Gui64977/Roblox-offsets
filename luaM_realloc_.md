@@ -6,7 +6,7 @@ GC memory allocators. Used by lua_newuserdata, lua_createtable, luaH_new, bla bl
 
 Fast path for common GC object sizes (< 1024 bytes). Uses per size category freelists.
 
-Find: search `"newproxy"` decompile -> find call to sub_954490 inside the GC alloc pattern:
+Find: search `"newproxy"`, xref, double click the RVA and decompile:
 
 ```c
   }
