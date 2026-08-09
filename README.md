@@ -1,5 +1,7 @@
 # Roblox-offsets
 
+**JOIN MY DISCORD!: https://discord.gg/rCgdEHHc3w**
+
 # Most of the guides are working again, updated to version d584fb6c717a43d9. Hopefully roblox won't do a massive update again.
 
 This is guide on how to get multiple roblox offsets through ida
@@ -16,7 +18,7 @@ Made with EVIL
 
 Time spent: over 50 hours
 
-**JOIN MY DISCORD!: https://discord.gg/rCgdEHHc3w**
+
 
 **Some offsets appear in multiple guides because they’re reused across different patterns, and because I'M INATTENTIVE AND DON'T KEEP TRACK OF WHAT I ALREADY DID!!!!**
 **Signatures will be posted in the nearest future.**
