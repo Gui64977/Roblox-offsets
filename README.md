@@ -274,3 +274,5 @@ RakPeerReceive:
 luaVM_new:
 
 NewInstance: 
+
+lua_pushnil: 
