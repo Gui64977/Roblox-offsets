@@ -1,33 +1,56 @@
-# lua_ref
-# lua_unref
+# lua_ref / lua_unref
 
-To find these search string `"__mode"` go to second xref and decompile:
-```c
-    sub_4B625F0(a1: (__int64)v2);
-    sub_4B61D80(a1: v2, a2: 0, a3: 0);
-    sub_4B63740(a1: v2, a2: -1);
-    sub_4B64920(a1: v2, a2: 4294967294LL);
-    sub_4B63510(a1: v2, a2: &unk_6040018);
-    sub_4B64870(a1: v2, a2: 4294967294LL, a3: "__mode");
-    sub_4B63BF0(a1: v2, a2: -10000, a3: *(_DWORD *)(a1 + 24));
-    if ( (unsigned int)sub_4B65630(a1: v2, a2: -1) != 0 )
-    {
-      sub_4B64870(a1: v2, a2: 4294967294LL, a3: "result");
-      sub_4B64A40(a1: v2, a2: 0xFFFFFFFFLL, a3: 1);
-      *(_DWORD *)(a1 + 28) = sub_4B642F0(a1: v2, a2: 0xFFFFFFFFLL); // <-- lua_ref
-      sub_4B64BC0(a1: v2, a2: -2);
-      v3 = *(unsigned int *)(a1 + 24);
-      if ( byte_7F2DF28 != 0 )
-      {
-        *(_DWORD *)(a1 + 24) = sub_4B656B0(a1: (__int64)v2, a2: v3); // <-- lua_unref
-      }
-      else
-      {
-        sub_4B656B0(a1: (__int64)v2, a2: v3); // <-- lua_unref
-        *(_DWORD *)(a1 + 24) = -1;
-      }
+## lua_ref
+
+Search `"[FLog::Error] Exception caught during ModuleScript reference weakening. {}"`:
+```asm
+.rdata:0000000006CA72A0 aFlogErrorExcep_0 db '[FLog::Error] Exception caught during ModuleScript reference weak'
+.rdata:0000000006CA72A0                                         ; DATA XREF: sub_5C43680+2F↑o
+.rdata:0000000006CA72E1                 db 'ening. {}',0
+.rdata:0000000006CA72EB ; _BYTE algn_6CA72EB[]
+.rdata:0000000006CA72EB algn_6CA72EB:
+.rdata:0000000006CA72EB                 align 4
+.rdata:0000000006CA72EC word_6CA72EC    dw 766Bh                ; DATA XREF: sub_23034E0+574↑r
 ```
-
-So the offsets are:
-lua_ref - 0x4B642F0
-lua_unref - 0x4B656B0
+For some reason it's placed really weirdly, double click sub_23034E0, decompile it and scroll all the way down:
+```c
+  }
+  v148[0] = v107;
+  HIDWORD(v148[1]) = 6;
+  sub_958BE0(a1: v2, a2: v103, a3: (int *)v148, a4: (int *)(*(_QWORD *)(v2 + 72) - 16LL));
+  v135 = *(_QWORD *)(v2 + 72) - 16LL;
+  *(_QWORD *)(v2 + 72) = v135;
+  *(_BYTE *)(*(_QWORD *)(v135 - 16) + 5LL) = 1;
+  *(_DWORD *)(v92 + 28) = sub_93A810(a1: (_QWORD *)v2, a2: 0xFFFFFFFFLL); // <-- lua_ref
+  *(_QWORD *)(v2 + 72) -= 16LL;
+  if ( __eh34_catch(0) )
+  {
+catch_state_0:
+    if ( __eh34_catch_type(0, &std::exception `RTTI Type Descriptor', &v151) )
+    {
+      if ( (unsigned __int8)qword_7A85F90 >= 6u && BYTE1(qword_7A85F90) >= 3u )
+      {
+        *(_QWORD *)&v152 = "[FLog::Error] Exception caught during ModuleScript reference weakening. {}";
+        v137 = (*(__int64 (__fastcall **)(const std::exception *))(*(_QWORD *)v151 + 8LL))(a1: v151);
+        v147[0] = "[FLog::Error] Exception caught during ModuleScript reference weakening. {}";
+        v139 = -1;
+        do
+          ++v139;
+        while ( aFlogErrorExcep_0[v139] != 0 );
+```
+```c
+    return;
+  }
+  __eh34_exit_try_state(0, -1);
+  v136 = *(unsigned int *)(v92 + 24);
+  if ( byte_81735F8 != 0 )
+  {
+    *(_DWORD *)(v92 + 24) = sub_93A990(a1: v2, a2: v136); // <-- lua_unref
+  }
+  else
+  {
+    sub_93A990(a1: v2, a2: v136); // <-- lua_unref
+    *(_DWORD *)(v92 + 24) = -1;
+  }
+}
+```
