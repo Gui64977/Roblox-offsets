@@ -1,4 +1,4 @@
-"_VERISION" string -> its xref -> decompile:
+"_VERSION" string -> its xref -> decompile:
 ```c
   sub_4B69E30(a1, a2: &off_603A3C8, a3: &off_6BBE0A0);
 ```
