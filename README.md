@@ -14,11 +14,9 @@ Byfron is watching me 😨
 
 Made with EVIL
 
-Time spent: over 40 hours
+Time spent: over 50 hours
 
-~~placeholder~~ lines
-
-~~placeholder~~ characters
+**JOIN MY DISCORD!: https://discord.gg/rCgdEHHc3w**
 
 **Some offsets appear in multiple guides because they’re reused across different patterns, and because I'M INATTENTIVE AND DON'T KEEP TRACK OF WHAT I ALREADY DID!!!!**
 **Signatures will be posted in the nearest future.**
