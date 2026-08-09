@@ -1,15 +1,24 @@
 # luaF_newLclosure
 
-To dump luaF_newLclosure search string "%s: bytecode corrupted" go to its xref decompile and find (near end):
-```c
-  while ( v228 < 0 );
-  if ( (*(_BYTE *)v3 & 4) != 0 )
-    sub_4B6CAC0(a1: v3, a2: v3, a3: v3 + 8); 
-  v229 = sub_4B93D70(a1: v3, a2: 0, a3: v249); // <-- luaF_newLclosure
-  v230 = *(_QWORD *)(v3 + 56);
-  *(_QWORD *)v230 = v229;
-  *(_DWORD *)(v230 + 12) = 8;
-  v231 = *(_QWORD *)(v3 + 56);
-``` 
+Creates a new Lua closure from a Proto object. Found inside luau_load (sub_97C200).
 
-So the offset is 04B93D70
+Use pattern or sum, it got inlined 😞:
+
+```c
+// Inline luaF_newLclosure inside luau_load:
+*(BYTE*)cl = 8;                    // GC tag = function
+*((BYTE*)cl + 1) = white_flags;    // marked
+*((BYTE*)cl + 2) = memcat;         // memory category
+*((QWORD*)cl + 1) = proto;         // VMValue encoded: cl+8 = proto - (cl+8)
+*((QWORD*)cl + 2) = 0;             // stacksize = 0
+*((QWORD*)cl + 3) = 0;             // preload = 0
+*((BYTE*)cl + 3) = isVariadic;     // variadic flag
+// upvalues initialized to NULL
+for (i = 0; i < proto->nups; i++)
+    cl->upvals[i] = NULL;
+*(QWORD*)stack_top = cl;           // push onto stack
+*(DWORD*)(stack_top + 12) = 8;     // TValue tag
+stack_top += 16;
+```
+
+Key: GC alloc via sub_954490, tag 8 = function, Proto pointer VMValue encoded.
