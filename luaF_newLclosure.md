@@ -1,6 +1,6 @@
 # luaF_newLclosure
 
-Creates a new Lua closure from a Proto object. Found inside luau_load (sub_97C200).
+Creates a new Lua closure from a Proto object. Found inside luau_load.
 
 Use pattern or sum, it got inlined 😞:
 
