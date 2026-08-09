@@ -1,26 +1,28 @@
 # lua_state encryption
 
-To find lua_state encryption we'll use offset we already know, luaS_newlstr which is sub_4B63510 decompile it and find this:
+The global_State pointer G is stored at `*(L + 0x28)` (hex) or `*(L + 40)` (decimal).
+
+Find in any function that accesses G. Open lua_tolstring (0x93DB50) decompilation:
+
 ```c
-      v14 = *(_QWORD *)v8;
-      v8 += 3;
-      v9 = (v13 ^ (v14 + v9)) - __ROR4__(v13, 14);
-      v10 = (v9 ^ (HIDWORD(v14) + v10)) - __ROR4__(v9, 11);
-      v11 = (v10 ^ v13) - __ROL4__(v10, 7);
-      --v12;
-    }
-    while ( v12 != 0 );
+if ( (unsigned __int64)(16LL * a2 + *(_QWORD *)(a1 + 96) - 16LL) < *(_QWORD *)(a1 + 72) )
+      v6 = (_DWORD *)(16LL * a2 + *(_QWORD *)(a1 + 96) - 16LL);
   }
-  for ( ; v4 != 0; --v4 )
-    v11 ^= ((unsigned int)v11 >> 2) + 32 * v11 + *((unsigned __int8 *)v8 + v4 - 1);
-  v15 = *(_QWORD *)(a1 + 40); // <-- lua_state encryption
-  v16 = *(_QWORD *)(*(_QWORD *)(v15 + 64) + 8 * (v11 & (unsigned __int64)(*(int *)(v15 + 56) - 1LL)));
-  if ( v16 == 0 )
+  if ( v6[3] != 6 )
   {
-LABEL_10:
-    if ( a3 <= 0x40000000 )
+    v7 = *(_BYTE *)(a1 + 1);
+    if ( (v7 & 4) != 0 )
     {
+      v8 = *(_QWORD *)(a1 + 112); // <-- THIS IS THE ENCRYPTION OFFSET!!!!!
+      *(_BYTE *)(a1 + 1) = v7 & 0xFB;
+      *(_QWORD *)(a1 + 56) = *(_QWORD *)(v8 + 64);
+      *(_QWORD *)(v8 + 64) = a1;
+    }
+    if ( (unsigned int)sub_956130(a1) == 0 )
+    {
+      if ( a3 != nullptr )
+        *a3 = 0;
+      goto LABEL_26;
 ```
 
-To get an actual offset click on 40 once and press h, ida will change it to 0x28, that is your offset
-Read VMVal.md to see how different vmvalues are decrypted
+Click on 112 once and press h, it'll become 0x70 which is the offset :D
