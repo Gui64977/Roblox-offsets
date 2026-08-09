@@ -1,17 +1,24 @@
-# lua_settable
+# lua_settable (C API)
 
-To find lua_settable we'll use Lua_SandBoxThread offset which is in my case 0x1DA9D90, decompile it and find:
+Sets table[key] = value from the stack. The table is at the given index, key above it, value on top.
+
+Found through Lua_SandBoxThread (0x119E530). Search `"__index"` bytes `5F 5F 69 6E 64 65 78 00` -> xref -> SandBoxThread -> sub_119DE10. At the end:
+
 ```c
-__int64 __fastcall sub_1DA9D90(__int64 a1)
-{
-  sub_4B61D80(a1, a2: 0, a3: 0);
-  sub_4B61D80(a1, a2: 0, a3: 0);
-  sub_1D22700(a1, a2: 0xFFFFFFFFLL);
-  sub_4B63370(a1, a2: "__index", a3: 7);
-  sub_4B63740(a1, a2: 4294957294LL);
-  sub_4B64B40(a1, a2: 4294967293LL); // <-- lua_settable
-  return sub_4B64920(a1, a2: 4294967294LL);
+    if ( v35 == nullptr )
+      goto LABEL_39;
+  }
+  v42 = *((_BYTE *)v35 + 1);
+  if ( ((v42 ^ ~*(_BYTE *)(v34 + 16) & 3) & 0xB) == 0 )
+    *((_BYTE *)v35 + 1) = v42 ^ 3;
+LABEL_81:
+  v65 = *(_QWORD *)(a1 + 72) - 16LL;
+  v69 = v35;
+  v70 = 6;
+  result = sub_958BE0(a1, a2: v68, a3: &v69, a4: v65); // <-- lua_settable
+  *(_QWORD *)(a1 + 72) -= 16LL;
+  return result;
 }
 ```
 
-So the offset is 0x4B64B40
+Offset: **0x958BE0**
