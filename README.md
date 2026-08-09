@@ -1,6 +1,6 @@
 # Roblox-offsets
 
-**JOIN MY DISCORD!: https://discord.gg/rCgdEHHc3w**
+**JOIN MY DISCORD!: https://discord.gg/rCgdEHHc3w** (signatures can be found here, i'm lazy to post them here, sowwy)
 
 # Most of the guides are working again, updated to version d584fb6c717a43d9. Hopefully roblox won't do a massive update again.
 
