@@ -1,8 +1,5 @@
-"_VERSION" string -> its xref -> decompile:
-```c
-  sub_4B69E30(a1, a2: &off_603A3C8, a3: &off_6BBE0A0);
-```
-```c
+"rawequal" string -> its xref -> decompile:
+```asm
 double click off_6BBE0A0 you'll land here:
 .rdata:0000000006BBE0A0                                         ; "assert"
 .rdata:0000000006BBE0A8                 dq offset sub_4B7DF90
@@ -21,7 +18,7 @@ double click off_6BBE0A0 you'll land here:
 .rdata:0000000006BBE110                 dq offset aPrint        ; "print"
 .rdata:0000000006BBE118                 dq offset sub_4B7D830
 .rdata:0000000006BBE120                 dq offset aRawequal     ; "rawequal"
-.rdata:0000000006BBE128                 dq offset sub_4B7DD20
+.rdata:0000000006BBE128                 dq offset sub_4B7DD20   ; <-- you're here
 .rdata:0000000006BBE130                 dq offset aRawget       ; "rawget"
 .rdata:0000000006BBE138                 dq offset sub_4B7DD70
 .rdata:0000000006BBE140                 dq offset aRawset       ; "rawset"
