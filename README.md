@@ -2,7 +2,7 @@
 
 **JOIN MY DISCORD!: https://discord.gg/rCgdEHHc3w** (signatures can be found here, i'm lazy to post them here, sowwy)
 
-# My awesome friend (sash256, 1206623256434446428) made a website! https://roblox-offsets.github.io/ if you prefer it over this messy repo, both have same guides.
+**My awesome friend (sash256, 1206623256434446428) made a website! https://roblox-offsets.github.io/ if you prefer it over this messy repo, both have same guides.**
 
 # Most of the guides are working again, updated to version d584fb6c717a43d9. Hopefully roblox won't do a massive update again.
 
