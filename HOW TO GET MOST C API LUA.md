@@ -212,15 +212,14 @@ double click off_6BBE0A0 you'll land here:
        sub_4B69F70(a1, 1, 0);          // <-- luaL_tolstring
        return 1;
 ```
-   ## Note: Two "push number" variants
 
    You'll see two functions pushing numbers throughout these decompilations:
 
    | Function | Signature | Tag | What |
    |----------|-----------|-----|------|
-   | `sub_4B63270` | `(L, int)` → double | 3 | Internal convenience. luaB_ functions use this to push ints as doubles.
+   | `sub_4B63270` | `(L, int)` -> double | 3 | Internal convenience. luaB_ functions use this to push ints as doubles.
    |
-   | `sub_4B632F0` | `(L, int64, int)` | 2 | **Real C API — `lua_pushinteger`.** Pushes a true Luau integer. |
+   | `sub_4B632F0` | `(L, int64, int)` | 2 | **Real C API - `lua_pushinteger`.** Pushes a true Luau integer. |
 
    The luaB_ wrappers use `0x4B63270` for convenience. Your own code should call the C API `lua_pushinteger` at
    `0x4B632F0`.
